@@ -59,12 +59,12 @@ This HTML content will be sent:
 
 ## Configuration options
 
-All configuration options can be configured using ENV variables. If using it as an express router, then configuration variables can also be passed as an argument to this method. All ENV variables can be prefixed with `EMAIL_`. Since one value can be configured in many ways some take precedence over others. For example for the `SENDER` The value used will be the first found in this list:
+All configuration options can be configured using ENV variables. If using it as an express router, then configuration variables can also be passed as an argument to this method. All ENV variables can be prefixed with `EMAIL_`. Since one value can be configured in many ways some take precedence over others. For example for the `DEFAULT_FROM` variable the value used will be the first found following this list:
 
-- `EMAIL_SENDER` parameter passed to `createRouter()`
-- `SENDER` parameter passed to `createRouter()`
-- `EMAIL_SENDER` ENV variable
-- `SENDER` ENV variable
+- `EMAIL_DEFAULT_FROM` parameter passed to `createRouter()`
+- `DEFAULT_FROM` parameter passed to `createRouter()`
+- `EMAIL_DEFAULT_FROM` ENV variable
+- `DEFAULT_FROM` ENV variable
 
 This is the list of available configuration options:
 
