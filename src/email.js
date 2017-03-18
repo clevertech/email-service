@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer')
 const ses = require('nodemailer-ses-transport')
+const stub = require('nodemailer-stub-transport')
 const AWS = require('aws-sdk')
 const juice = require('juice')
 const pug = require('pug')
@@ -9,7 +10,7 @@ const fs = require('fs')
 const winston = require('winston')
 
 const createTransport = env => {
-  const transport = env('EMAIL_TRANSPORT')
+  const transport = env('TRANSPORT')
   if (transport === 'ses') {
     AWS.config.update({
       accessKeyId: env('AWS_KEY'),
@@ -19,9 +20,9 @@ const createTransport = env => {
     return nodemailer.createTransport(ses({ ses: new AWS.SES() }))
   }
   if (transport === 'stub') {
-    return nodemailer.createTransport(require('nodemailer-stub-transport')())
+    return nodemailer.createTransport(stub())
   }
-  winston.error('No valid EMAIL_TRANSPORT set')
+  winston.error('No valid TRANSPORT set')
   return nodemailer.createTransport() // direct transport
 }
 

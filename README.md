@@ -73,7 +73,7 @@ This is the list of available configuration options:
 | `PORT` | Port number for the standalone application. Defaults to 3000 |
 | `DEFAULT_FROM` | Default email sender if a `from` parameter is not specified |
 | `DEFAULT_LANGUAGE` | Default language to be used if a `language` is not specified. Defaults to `en` |
-| `EMAIL_TRANSPORT` | Third-party service to be used to send the email. Only `ses` is supported for production and `stub` for testing |
+| `TRANSPORT` | Third-party service to be used to send the email. Only `ses` is supported for production and `stub` for testing |
 | `AWS_KEY` | AWS Key for sending emails using Amazon SES |
 | `AWS_SECRET` | AWS Secret for sending emails using Amazon SES |
 | `AWS_REGION` | AWS Region for sending emails using Amazon SES |
@@ -92,3 +92,18 @@ For the HTML body one of these will be used:
 - `{lang}/{templateName}-body-html.pug` HTML template using [PUG](https://pugjs.org)
 
 The HTML output of the template is passed through [juice](https://github.com/Automattic/juice) for inlining the CSS styles.
+
+## Example templates
+
+There are a few example templates available in the `example_templates` directory of the repo.
+
+## Testing your templates
+
+You can test your templates from the command line using tools such as [ejs-cli](https://www.npmjs.com/package/ejs-cli). For example:
+
+```bash
+ejs-cli example_templates/en/password_reset-body-html.ejs -O '{"name":"John","action_url":"http://","operating_system":"","browser_name":"","supp
+ort_url":""}' > password_reset.html
+```
+
+Or you can specify `TRANSPORT=stub`. This way no real emails will be sent and you will get the rendered templates as response when invoking the service.

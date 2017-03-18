@@ -2,7 +2,7 @@ const path = require('path')
 const test = require('ava')
 
 process.env.TEMPLATES_DIR = path.join(__dirname, 'templates')
-process.env.EMAIL_TRANSPORT = 'stub'
+process.env.TRANSPORT = 'stub'
 const fetch = require('./_fetch')
 
 const env = require('../src/utils/env')()
