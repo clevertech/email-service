@@ -4,7 +4,7 @@ Plug&Play email service that can be used as a standalone web application or as a
 
 ## Running as a standalone application
 
-The npm package configures an `email_service` executable. You will pass configuration options
+The npm package configures an `pnp-email-service` executable. You will pass configuration options
 through ENV variables. Check the configuration options below.
 
 ## Running as an express router
