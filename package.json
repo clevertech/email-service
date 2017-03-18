@@ -1,6 +1,6 @@
 {
   "name": "pnp-email-service",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Plug&Play email service. Send emails based on templates",
   "author": "Clevertech <support@clevertech.biz>",
   "main": "src/index.js",
