@@ -2,10 +2,25 @@
 
 Plug&Play email service that can be used as a standalone web application or as an express router
 
-## Running as a standalone application
+## Running as a command line application
 
 The npm package configures an `pnp-email-service` executable. You will pass configuration options
 through ENV variables. Check the configuration options below.
+
+## Running as a standalone HTTP server via API
+
+This is the recommended method for running the microservice via API. You can ignore the `PORT` configuration and this will spin up a server at a random port. Then you can obtain the port the server is running by calling `server.address().port`. This way the microservice is not exposed in the same port than your main application and you are sure it will run in an available port.
+
+```javascript
+const emailService = require('pnp-email-service')
+const config = {
+  /* Check the configuration options below */
+}
+const server = emailService.startServer(config, () => {
+  const port = server.address().port
+  console.log(`Listening on port ${port}! Send an HTTP POST to http://0.0.0.0:${port}/email/send for sending an email`)
+})
+```
 
 ## Running as an express router
 
@@ -70,7 +85,7 @@ This is the list of available configuration options:
 
 | Variable | Description |
 | --- | --- |
-| `PORT` | Port number for the standalone application. Defaults to 3000 |
+| `PORT` | Port number for the standalone application. If not specified it will run in a random port |
 | `DEFAULT_FROM` | Default email sender if a `from` parameter is not specified |
 | `DEFAULT_LANGUAGE` | Default language to be used if a `language` is not specified. Defaults to `en` |
 | `TRANSPORT` | Third-party service to be used to send the email. Only `ses` is supported for production and `stub` for testing |

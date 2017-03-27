@@ -40,12 +40,11 @@ exports.createRouter = (config = {}) => {
   return router
 }
 
-exports.standaloneApp = () => {
-  const config = process.env
+exports.startServer = (config, callback) => {
   const env = require('./utils/env')(config)
   const app = express()
   const router = exports.createRouter(config)
-  const port = +env('PORT') || 3000
+  const port = +env('PORT') || 0
 
   app.use('/email', router)
 
@@ -59,12 +58,13 @@ exports.standaloneApp = () => {
     res.send(`User-agent: *\nDisallow:${pattern}\n`)
   })
 
-  app.listen(port, () => {
-    winston.info('NODE_ENV: ' + process.env.NODE_ENV)
-    winston.info(`Listening on port ${port}! Send an HTTP POST to http://host:${port}/email/send for sending an email`)
-  })
+  return app.listen(port, callback)
 }
 
 if (require.main === module) {
-  exports.standaloneApp()
+  const server = exports.startServer({}, () => {
+    const port = server.address().port
+    winston.info('NODE_ENV: ' + process.env.NODE_ENV)
+    winston.info(`Listening on port ${port}! Send an HTTP POST to http://host:${port}/email/send for sending an email`)
+  })
 }
