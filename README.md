@@ -72,6 +72,32 @@ This HTML content will be sent:
 <p>Cheers,</p>
 ```
 
+### Full example
+
+The following code users `node-fetch` as HTTP client library. It spins an HTTP server and provides a simple `sendEmail()` function:
+
+```javascript
+const fetch = require('node-fetch')
+const emailService = require('pnp-email-service')
+const emailServer = emailService.startServer(config)
+
+const sendEmail = (templateName, emailOptions, templateOptions, language) => {
+  const port = emailServer.address().port
+  const url = `http://0.0.0.0:${port}/email/send`
+  const body = { templateName, emailOptions, templateOptions, language }
+  return fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' }
+  })
+}
+
+// Example usage passing a `user` object to the template
+sendEmail('welcome', { to: email }, { user })
+  .then(response => console.log('Email sent'))
+  .catch(err => console.error(err.stack))
+```
+
 ## Configuration options
 
 All configuration options can be configured using ENV variables. If using it as an express router, then configuration variables can also be passed as an argument to this method. All ENV variables can be prefixed with `EMAIL_`. Since one value can be configured in many ways some take precedence over others. For example for the `DEFAULT_FROM` variable the value used will be the first found following this list:

@@ -1,7 +1,7 @@
 {
   "name": "pnp-email-service",
   "version": "0.1.4",
-  "description": "Plug&Play email service. Send emails based on templates",
+  "description": "Email microservice that sends emails based on templates",
   "author": "Clevertech <support@clevertech.biz>",
   "license": "MIT",
   "bugs": {
