@@ -1,6 +1,6 @@
 # Email service
 
-Plug&Play email service that can be used as a standalone web application or as an express router
+Email microservice that sends emails based on templates. Can be used as a standalone web service or as an express router.
 
 ## Running as a command line application
 
