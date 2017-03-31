@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const baseURL = `http://127.0.0.1:${process.env.PORT}`
+const baseURL = `http://127.0.0.1:${process.env.MICROSERVICE_PORT}`
 
 require('../').startServer()
 

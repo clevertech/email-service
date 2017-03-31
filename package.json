@@ -1,6 +1,6 @@
 {
   "name": "pnp-email-service",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Email microservice that sends emails based on templates",
   "author": "Clevertech <support@clevertech.biz>",
   "license": "MIT",
@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node src/index.js",
     "start-dev": "nodemon",
-    "test": "PORT=3001 ava --verbose --fail-fast",
+    "test": "MICROSERVICE_PORT=3001 ava --verbose --fail-fast",
     "lint": "standard"
   },
   "bin": {

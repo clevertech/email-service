@@ -44,7 +44,7 @@ exports.startServer = (config, callback) => {
   const env = require('./utils/env')(config)
   const app = express()
   const router = exports.createRouter(config)
-  const port = +env('PORT') || 0
+  const port = +env('MICROSERVICE_PORT') || 0
 
   app.use('/email', router)
 
