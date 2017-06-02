@@ -22,6 +22,20 @@ const createTransport = env => {
   if (transport === 'stub') {
     return nodemailer.createTransport(stub())
   }
+  if (transport === 'smtp') {
+    let smtpConfig = {
+        host: env('SMTP_HOST'),
+        port: env('SMTP_PORT'),
+        secure: (env('SMTP_SECURE') == 'true'), // use TLS,
+        ignoreTLS:  (env('SMTP_SECURE') == 'false'), // use TLS
+        auth: {
+            user: env('SMTP_USER'),
+            pass: env('SMTP_PASS')
+        }
+    };
+    
+    return nodemailer.createTransport(smtpConfig);
+  }
   winston.error('No valid TRANSPORT set')
   return nodemailer.createTransport() // direct transport
 }
