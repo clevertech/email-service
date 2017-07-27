@@ -17,15 +17,18 @@ module.exports = env => {
       })
       return nodemailer.createTransport(ses({ ses: new AWS.SES() }))
     case 'sendgrid':
-      const options = {
+      return nodemailer.createTransport(sendgrid({
         auth: {
           api_user: env('SENDGRID_USERNAME'),
           api_key: env('SENDGRID_PASSWORD') || env('SENDGRID_API_KEY')
         }
-      }
-      return nodemailer.createTransport(sendgrid(options))
+      }))
     case 'postmark':
-
+      return nodemailer.createTransport(postmark({
+        auth: {
+          apiKey: env('POSTMARK_API_KEY')
+        }
+      }))
     case 'mandrill':
 
     case 'mailgun':
