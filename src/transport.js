@@ -2,8 +2,7 @@ const nodemailer = require('nodemailer')
 const ses = require('nodemailer-ses-transport')
 const sendgrid = require('nodemailer-sendgrid-transport')
 const postmark = require('nodemailer-postmark-transport')
-const mandrill = require('nodemailer-mandrill-transport')
-const mailgun = require('nodemailer-mailgunapi-transport')
+const mailgun = require('nodemailer-mailgun-transport')
 const stub = require('nodemailer-stub-transport')
 const winston = require('winston')
 
@@ -29,10 +28,13 @@ module.exports = env => {
           apiKey: env('POSTMARK_API_KEY')
         }
       }))
-    case 'mandrill':
-
     case 'mailgun':
-
+      return nodemailer.createTransport(mailgun({
+        auth: {
+          api_key: env('MAILGUN_API_KEY'),
+          domain: env('MAILGUN_DOMAIN')
+        }
+      }))
     case 'stub':
       return nodemailer.createTransport(stub())
   }
