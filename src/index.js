@@ -63,8 +63,8 @@ exports.startServer = (config, callback) => {
 
 if (require.main === module) {
   const server = exports.startServer({}, () => {
-    const port = server.address().port
+    const address = server.address()
     winston.info('NODE_ENV: ' + process.env.NODE_ENV)
-    winston.info(`Listening on port ${port}! Send an HTTP POST to http://host:${port}/email/send for sending an email`)
+    winston.info(`Listening on port ${address.port}! Send an HTTP POST to http://${address.address}:${address.port}/email/send for sending an email`)
   })
 }

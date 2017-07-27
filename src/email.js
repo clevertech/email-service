@@ -1,6 +1,3 @@
-const nodemailer = require('nodemailer')
-const ses = require('nodemailer-ses-transport')
-const stub = require('nodemailer-stub-transport')
 const AWS = require('aws-sdk')
 const juice = require('juice')
 const pug = require('pug')
@@ -9,7 +6,7 @@ const path = require('path')
 const fs = require('fs')
 const winston = require('winston')
 
-const createTransport = require('./transport');
+const createTransport = require('./transport')
 
 module.exports = env => {
   const defaultLanguage = env('DEFAULT_LANGUAGE', 'en')
