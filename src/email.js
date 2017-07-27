@@ -9,22 +9,7 @@ const path = require('path')
 const fs = require('fs')
 const winston = require('winston')
 
-const createTransport = env => {
-  const transport = env('TRANSPORT')
-  if (transport === 'ses') {
-    AWS.config.update({
-      accessKeyId: env('AWS_KEY'),
-      secretAccessKey: env('AWS_SECRET'),
-      region: env('AWS_REGION')
-    })
-    return nodemailer.createTransport(ses({ ses: new AWS.SES() }))
-  }
-  if (transport === 'stub') {
-    return nodemailer.createTransport(stub())
-  }
-  winston.error('No valid TRANSPORT set')
-  return nodemailer.createTransport() // direct transport
-}
+const createTransport = require('./transport');
 
 module.exports = env => {
   const defaultLanguage = env('DEFAULT_LANGUAGE', 'en')
