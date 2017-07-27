@@ -37,7 +37,8 @@ module.exports = env => {
       }))
     case 'stub':
       return nodemailer.createTransport(stub())
+    default:
+      winston.error('No valid TRANSPORT set')
+      return nodemailer.createTransport() // direct transport
   }
-  winston.error('No valid TRANSPORT set')
-  return nodemailer.createTransport() // direct transport
 }
