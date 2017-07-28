@@ -114,10 +114,14 @@ This is the list of available configuration options:
 | `MICROSERVICE_PORT` | Port number for the standalone application. If not specified it will run in a random port |
 | `DEFAULT_FROM` | Default email sender if a `from` parameter is not specified |
 | `DEFAULT_LANGUAGE` | Default language to be used if a `language` is not specified. Defaults to `en` |
-| `TRANSPORT` | Third-party service to be used to send the email. Only `ses` is supported for production and `stub` for testing |
+| `TRANSPORT` | Third-party service to be used to send the email. Supported values: [`ses`, `sendgrid`, `postmark`, `mailgun`] for production; `stub` for testing |
 | `AWS_KEY` | AWS Key for sending emails using Amazon SES |
 | `AWS_SECRET` | AWS Secret for sending emails using Amazon SES |
 | `AWS_REGION` | AWS Region for sending emails using Amazon SES |
+| `SENDGRID_API_KEY` | API Key for sending emails when using Sendgrid |
+| `POSTMARK_API_KEY` | API Key for sending emails when using Postmark |
+| `MAILGUN_API_KEY` | API Key for sending emails when using Mailgun |
+| `MAILGUN_DOMAIN` | Domain name from which emails are sent when using Mailgun |
 | `TEMPLATES_DIR` | Absolute path to directory where templates will be found |
 
 ## Templates
