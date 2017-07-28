@@ -18,8 +18,7 @@ module.exports = env => {
     case 'sendgrid':
       return nodemailer.createTransport(sendgrid({
         auth: {
-          api_user: env('SENDGRID_USERNAME'),
-          api_key: env('SENDGRID_PASSWORD') || env('SENDGRID_API_KEY')
+          api_key: env('SENDGRID_API_KEY')
         }
       }))
     case 'postmark':
