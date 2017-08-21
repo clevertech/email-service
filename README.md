@@ -18,7 +18,7 @@ const config = {
 }
 const server = emailService.startServer(config, () => {
   const port = server.address().port
-  console.log(`Listening on port ${port}! Send an HTTP POST to http://0.0.0.0:${port}/email/send for sending an email`)
+  console.log(`Listening on port ${port}! Send an HTTP POST to http://127.0.0.1:${port}/email/send for sending an email`)
 })
 ```
 
@@ -74,7 +74,7 @@ This HTML content will be sent:
 
 ### Full example
 
-The following code users `node-fetch` as HTTP client library. It spins an HTTP server and provides a simple `sendEmail()` function:
+The following code uses `node-fetch` as HTTP client library. It spins an HTTP server and provides a simple `sendEmail()` function:
 
 ```javascript
 const fetch = require('node-fetch')
@@ -83,7 +83,7 @@ const emailServer = emailService.startServer(config)
 
 const sendEmail = (templateName, emailOptions, templateOptions, language) => {
   const port = emailServer.address().port
-  const url = `http://0.0.0.0:${port}/email/send`
+  const url = `http://127.0.0.1:${port}/email/send`
   const body = { templateName, emailOptions, templateOptions, language }
   return fetch(url, {
     method: 'POST',
