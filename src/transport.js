@@ -9,6 +9,7 @@ const winston = require('winston')
 module.exports = env => {
   switch(env('TRANSPORT')) {
     case 'ses':
+      const AWS = require('aws-sdk')
       AWS.config.update({
         accessKeyId: env('AWS_KEY'),
         secretAccessKey: env('AWS_SECRET'),
