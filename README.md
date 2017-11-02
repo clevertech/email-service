@@ -122,6 +122,11 @@ This is the list of available configuration options:
 | `POSTMARK_API_KEY` | API Key for sending emails when using Postmark |
 | `MAILGUN_API_KEY` | API Key for sending emails when using Mailgun |
 | `MAILGUN_DOMAIN` | Domain name from which emails are sent when using Mailgun |
+| `SMTP_HOST` | SMTP host from which emails are sent when using SMTP |
+| `SMTP_PORT` | SMTP port from which emails are sent when using SMTP |
+| `SMTP_SECURE` | SMTP TLS from which emails are sent when using SMTP ("true"/"false") |
+| `SMTP_USER` | SMTP user from which emails are sent when using SMTP |
+| `SMTP_PASS` | SMTP password from which emails are sent when using SMTP |
 | `TEMPLATES_DIR` | Absolute path to directory where templates will be found |
 
 ## Templates
