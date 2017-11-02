@@ -24,7 +24,7 @@ exports.createRouter = (config = {}) => {
     const { body } = req
     const token = body.token
     if( token != null && token !== env('TOKEN')){
-      return res.status(404).json({
+      return res.status(403).json({
         error: "Forbbiden access: Invalid token",
       })
     }
