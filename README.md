@@ -128,6 +128,7 @@ This is the list of available configuration options:
 | `SMTP_USER` | SMTP user from which emails are sent when using SMTP |
 | `SMTP_PASS` | SMTP password from which emails are sent when using SMTP |
 | `TEMPLATES_DIR` | Absolute path to directory where templates will be found |
+| `TOKEN` | Secret Token to communicate the microservice and your app (optional) |
 
 ## Templates
 

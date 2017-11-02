@@ -10,7 +10,8 @@ const schema = Joi.object().keys({
   templateName: Joi.string().required(),
   templateOptions: Joi.object().required(),
   emailOptions: Joi.object().required(),
-  language: Joi.string()
+  language: Joi.string(),
+  token: Joi.string(),
 })
 
 exports.createRouter = (config = {}) => {
@@ -21,6 +22,12 @@ exports.createRouter = (config = {}) => {
   router.use(bodyParser.json({}))
   router.post('/send', (req, res, next) => {
     const { body } = req
+    const token = body.token
+    if( token !== null && token !== env('TOKEN')){
+      return res.status(404).json({
+        error: "Forbbiden access: Invalid token",
+      })
+    }
     const result = Joi.validate(body, schema)
     if (result.error) {
       return res.status(400).json({
