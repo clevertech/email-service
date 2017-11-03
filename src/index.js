@@ -10,8 +10,7 @@ const schema = Joi.object().keys({
   templateName: Joi.string().required(),
   templateOptions: Joi.object().required(),
   emailOptions: Joi.object().required(),
-  language: Joi.string(),
-  token: Joi.string(),
+  language: Joi.string()
 })
 
 exports.createRouter = (config = {}) => {
