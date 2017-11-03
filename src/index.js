@@ -22,12 +22,6 @@ exports.createRouter = (config = {}) => {
   router.use(bodyParser.json({}))
   router.post('/send', (req, res, next) => {
     const { body } = req
-    const token = body.token
-    if( token != null && token !== env('TOKEN')){
-      return res.status(403).json({
-        error: "Forbbiden access: Invalid token",
-      })
-    }
     const result = Joi.validate(body, schema)
     if (result.error) {
       return res.status(400).json({
