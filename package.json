@@ -1,6 +1,6 @@
 {
   "name": "pnp-email-service",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Email microservice that sends emails based on templates",
   "author": "Clevertech <support@clevertech.biz>",
   "license": "MIT",
