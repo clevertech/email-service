@@ -35,6 +35,17 @@ module.exports = env => {
           domain: env('MAILGUN_DOMAIN')
         }
       }))
+    case 'smtp':
+      return nodemailer.createTransport({
+        host: env('SMTP_HOST'),
+        port: env('SMTP_PORT'),
+        secure: (env('SMTP_SECURE') == 'true'), // use TLS,
+        ignoreTLS:  (env('SMTP_SECURE') == 'false'), // use TLS
+        auth: {
+            user: env('SMTP_USER'),
+            pass: env('SMTP_PASS')
+        }
+    });
     case 'stub':
       return nodemailer.createTransport(stub())
     default:
