@@ -7,7 +7,7 @@ const stub = require('nodemailer-stub-transport')
 const winston = require('winston')
 
 module.exports = env => {
-  switch(env('TRANSPORT')) {
+  switch (env('TRANSPORT')) {
     case 'ses':
       const AWS = require('aws-sdk')
       AWS.config.update({
@@ -39,13 +39,13 @@ module.exports = env => {
       return nodemailer.createTransport({
         host: env('SMTP_HOST'),
         port: env('SMTP_PORT'),
-        secure: (env('SMTP_SECURE') == 'true'), // use TLS,
-        ignoreTLS:  (env('SMTP_SECURE') == 'false'), // use TLS
+        secure: (env('SMTP_SECURE') == 'true'), // eslint-disable-line eqeqeq
+        ignoreTLS: (env('SMTP_SECURE') == 'false'), // eslint-disable-line eqeqeq
         auth: {
-            user: env('SMTP_USER'),
-            pass: env('SMTP_PASS')
+          user: env('SMTP_USER'),
+          pass: env('SMTP_PASS')
         }
-    });
+      })
     case 'stub':
       return nodemailer.createTransport(stub())
     default:
