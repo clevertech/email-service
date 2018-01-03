@@ -7,6 +7,7 @@ const fetch = require('./_fetch')
 
 const env = require('../src/utils/env')()
 const email = require('../src/email')(env)
+const index = require('../')
 
 test('render template with ejs body', t => {
   return email.processTemplate('ejsbody', { user: { name: 'John' } }, 'en')
@@ -56,6 +57,38 @@ test('successful rest API call', t => {
     body: {
       language: 'en',
       templateName: 'pugbody',
+      templateOptions: {
+        user: { name: 'John' }
+      },
+      emailOptions: {
+        from: 'Judy <judy@example.com>',
+        to: 'John <john@example.com>'
+      }
+    }
+  })
+  .then(response => {
+    t.is(response.status, 200)
+    return response.json()
+  })
+  .then(body => {
+    t.truthy(body.messageId)
+    t.deepEqual(body.envelope, { from: 'judy@example.com', to: [ 'john@example.com' ] })
+  })
+})
+
+test('successful rest API call with global template options', t => {
+  // Set our global_template_option variable, fails without it.
+  index.setGlobalTemplateOptions({
+    global_template_option: {
+      test: 'a global template option'
+    }
+  })
+
+  return fetch('/email/send', {
+    method: 'POST',
+    body: {
+      language: 'en',
+      templateName: 'global_template_option_test',
       templateOptions: {
         user: { name: 'John' }
       },
