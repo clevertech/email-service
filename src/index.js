@@ -4,6 +4,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const winston = require('winston')
 
+let globalTemplateOptions = {}
+
 const Joi = require('joi')
 
 const schema = Joi.object().keys({
@@ -33,11 +35,16 @@ exports.createRouter = (config = {}) => {
       templateOptions,
       language
     } = req.body
-    service.sendTemplatedEmail(emailOptions, templateName, templateOptions, language)
+    const mergedTemplateOptions = { ...globalTemplateOptions, ...templateOptions }
+    service.sendTemplatedEmail(emailOptions, templateName, mergedTemplateOptions, language)
       .then(response => res.json(response))
       .catch(err => res.status(500).json({ error: err.message || String(err) }))
   })
   return router
+}
+
+exports.setGlobalTemplateOptions = (templateOptions) => {
+  globalTemplateOptions = templateOptions
 }
 
 exports.startServer = (config, callback) => {
