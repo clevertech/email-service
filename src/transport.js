@@ -36,16 +36,20 @@ module.exports = env => {
         }
       }))
     case 'smtp':
-      return nodemailer.createTransport({
+      let auth;
+      if (env('SMTP_USER') && env('SMTP_PASS')) {
+        auth = {
+          user: env('SMTP_USER'),
+          pass: env('SMTP_PASS')
+        };
+      }
+      const config = {
         host: env('SMTP_HOST'),
         port: env('SMTP_PORT'),
         secure: (env('SMTP_SECURE') == 'true'), // eslint-disable-line eqeqeq
         ignoreTLS: (env('SMTP_SECURE') == 'false'), // eslint-disable-line eqeqeq
-        auth: {
-          user: env('SMTP_USER'),
-          pass: env('SMTP_PASS')
-        }
-      })
+      } 
+      return nodemailer.createTransport(auth ? config: {...config, auth })
     case 'stub':
       return nodemailer.createTransport(stub())
     default:
